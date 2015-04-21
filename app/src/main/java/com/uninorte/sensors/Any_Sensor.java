@@ -51,7 +51,7 @@ public class Any_Sensor extends Fragment implements SensorEventListener {
         mEditTextY = (EditText) rootView.findViewById(R.id.editText1);
         mEditTextZ = (EditText) rootView.findViewById(R.id.editText2);
         mButton = (Button) rootView.findViewById(R.id.buttonAccel);
-        if  (wSensor == 2 || wSensor == 3 || wSensor ==4){
+        if  (wSensor == 3 || wSensor ==4){
             mEditTextY.setVisibility(View.INVISIBLE);
             mEditTextZ.setVisibility(View.INVISIBLE);
             mTexViewY.setVisibility(View.INVISIBLE);
@@ -63,7 +63,7 @@ public class Any_Sensor extends Fragment implements SensorEventListener {
             if (wSensor == 1){
                 mTextView.setText("Magnetic Field Sensor");
             }else{
-                if (wSensor == 2){
+                if (wSensor == 2 || wSensor == 10){
                     mTextView.setText("Orientation Sensor");
                 }else{
                     if  (wSensor == 3){
@@ -72,7 +72,23 @@ public class Any_Sensor extends Fragment implements SensorEventListener {
                         if (wSensor == 4) {
                             mTextView.setText("Light Sensor");
                         }else {
-
+                            if  (wSensor == 5){
+                                mTextView.setText("Rotation Sensor");
+                            }else {
+                                if (wSensor == 6){
+                                    mTextView.setText("Gyroscope Sensor");
+                                }else {
+                                    if (wSensor == 7){
+                                        mTextView.setText("Rotation Vector Sensor");
+                                    }else {
+                                        if (wSensor == 8){
+                                            mTextView.setText("Gravity Sensor");
+                                        }else {
+                                            mTextView.setText("Linear Acceleration Sensor");
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -124,7 +140,7 @@ public class Any_Sensor extends Fragment implements SensorEventListener {
             if (wSensor == 1) {
                 mAcelSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
             }else {
-                if (wSensor == 2){
+                if (wSensor == 2 || wSensor == 10){
                     mAcelSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
                 }else {
                     if (wSensor == 3){
@@ -133,7 +149,23 @@ public class Any_Sensor extends Fragment implements SensorEventListener {
                         if (wSensor == 4){
                             mAcelSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
                         }else {
-
+                            if (wSensor == 5){
+                                mAcelSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
+                            }else {
+                                if (wSensor == 6){
+                                    mAcelSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
+                                }else {
+                                    if (wSensor == 7){
+                                        mAcelSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
+                                    }else {
+                                        if (wSensor == 8){
+                                            mAcelSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY);
+                                        }else {
+                                            mAcelSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -160,7 +192,7 @@ public class Any_Sensor extends Fragment implements SensorEventListener {
     }
     @Override
     public void onSensorChanged(SensorEvent event) {
-        if  (wSensor == 2 || wSensor == 3 || wSensor ==4){
+        if  (wSensor == 3 || wSensor ==4){
             mEditTextX.setText(event.values[0] + "");
         }else{
             mEditTextX.setText(event.values[0] + "");
