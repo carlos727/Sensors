@@ -59,7 +59,8 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_marginLeft="10dp"
-                android:text="Y" />
+                android:text="Y"
+                android:id="@+id/textY" />
 
             <EditText
                 android:layout_width="0dp"
@@ -83,7 +84,8 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_marginLeft="10dp"
-                android:text="Z" />
+                android:text="Z"
+                android:id="@+id/textZ" />
 
             <EditText
                 android:layout_width="0dp"

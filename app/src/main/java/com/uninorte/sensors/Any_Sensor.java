@@ -22,6 +22,8 @@ public class Any_Sensor extends Fragment implements SensorEventListener {
     private SensorManager mSensorManager;
     private Sensor mAcelSensor;
     private TextView mTextView;
+    private TextView mTexViewY;
+    private TextView mTexViewZ;
     private EditText mEditTextX;
     private EditText mEditTextY;
     private EditText mEditTextZ;
@@ -43,18 +45,36 @@ public class Any_Sensor extends Fragment implements SensorEventListener {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
         mTextView = (TextView) rootView.findViewById(R.id.textView);
+        mTexViewY = (TextView) rootView.findViewById(R.id.textY);
+        mTexViewZ = (TextView) rootView.findViewById(R.id.textZ);
         mEditTextX = (EditText) rootView.findViewById(R.id.editText);
         mEditTextY = (EditText) rootView.findViewById(R.id.editText1);
         mEditTextZ = (EditText) rootView.findViewById(R.id.editText2);
         mButton = (Button) rootView.findViewById(R.id.buttonAccel);
+        if  (wSensor == 2 || wSensor == 3 || wSensor ==4){
+            mEditTextY.setVisibility(View.INVISIBLE);
+            mEditTextZ.setVisibility(View.INVISIBLE);
+            mTexViewY.setVisibility(View.INVISIBLE);
+            mTexViewZ.setVisibility(View.INVISIBLE);
+        }
         if(wSensor == 0){
-            mTextView.setText("Acelerometro");
+            mTextView.setText("Acelerometer");
         }else {
             if (wSensor == 1){
-                mTextView.setText("Sensor de Campo Magnetico");
+                mTextView.setText("Magnetic Field Sensor");
             }else{
-                if (wSensor == 4){
+                if (wSensor == 2){
+                    mTextView.setText("Orientation Sensor");
+                }else{
+                    if  (wSensor == 3){
+                        mTextView.setText("Proximity Sensor");
+                    }else {
+                        if (wSensor == 4) {
+                            mTextView.setText("Light Sensor");
+                        }else {
 
+                        }
+                    }
                 }
             }
         }
@@ -101,7 +121,23 @@ public class Any_Sensor extends Fragment implements SensorEventListener {
         if (wSensor == 0) {
             mAcelSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         }else {
-            mAcelSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
+            if (wSensor == 1) {
+                mAcelSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
+            }else {
+                if (wSensor == 2){
+                    mAcelSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
+                }else {
+                    if (wSensor == 3){
+                        mAcelSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
+                    }else {
+                        if (wSensor == 4){
+                            mAcelSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
+                        }else {
+
+                        }
+                    }
+                }
+            }
         }
         mSensorManager.registerListener(this, mAcelSensor,SensorManager.SENSOR_DELAY_NORMAL);
 
@@ -124,9 +160,13 @@ public class Any_Sensor extends Fragment implements SensorEventListener {
     }
     @Override
     public void onSensorChanged(SensorEvent event) {
-        mEditTextX.setText(event.values[0] + "");
-        mEditTextY.setText(event.values[1] + "");
-        mEditTextZ.setText(event.values[2] + "");
+        if  (wSensor == 2 || wSensor == 3 || wSensor ==4){
+            mEditTextX.setText(event.values[0] + "");
+        }else{
+            mEditTextX.setText(event.values[0] + "");
+            mEditTextY.setText(event.values[1] + "");
+            mEditTextZ.setText(event.values[2] + "");
+        }
     }
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {

@@ -107,13 +107,8 @@ public class MainActivity extends ActionBarActivity implements ActionBar.OnNavig
     public boolean onNavigationItemSelected(int position, long id) {
         // When the given dropdown item is selected, show its contents in the
         // container view.
-        Fragment newFragment = null;
-        if (position == 0){
-            newFragment = Any_Sensor.newInstance(position,0);
-        }
-        if (position == 1 ){
-            newFragment = Any_Sensor.newInstance(position,1);
-        }
+        Fragment newFragment;
+        newFragment = Any_Sensor.newInstance(position,position);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.container, newFragment,String.valueOf(id));
         ft.commit();
